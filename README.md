@@ -1,16 +1,16 @@
-# 🤖 RoboPet — ESP32 Obstacle-Avoiding Robot
+# RoboPet — ESP32 Obstacle-Avoiding Robot
 
 An autonomous obstacle-avoiding robot built on the **ESP32** microcontroller. RoboPet uses a sweeping ultrasonic sensor mounted on a servo to continuously scan its environment and react in real time — moving forward when the path is clear, stopping when something is close, and reversing when an obstacle is detected nearby.
 
 ---
 
-## 📸 Overview
+## Overview
 
 RoboPet mimics the curiosity of a small pet — always scanning ahead, cautiously navigating its surroundings without any human input.
 
 ---
 
-## ⚙️ Hardware Requirements
+## Hardware Requirements
 
 | Component | Details |
 |---|---|
@@ -35,7 +35,7 @@ RoboPet mimics the curiosity of a small pet — always scanning ahead, cautiousl
 
 ---
 
-## 📦 Dependencies
+## Dependencies
 
 Install the following library via the **Arduino Library Manager** or PlatformIO:
 
@@ -43,7 +43,7 @@ Install the following library via the **Arduino Library Manager** or PlatformIO:
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Clone this repository**
    ```bash
@@ -63,7 +63,7 @@ Install the following library via the **Arduino Library Manager** or PlatformIO:
 
 ---
 
-## 🧠 How It Works
+## How It Works
 
 The servo sweeps left and right continuously, taking an ultrasonic distance reading at each step.
 
@@ -77,7 +77,7 @@ The servo sweeps between **20° and 160°** (±70° from center) in 1° incremen
 
 ---
 
-## 🔧 Tunable Parameters
+## Tunable Parameters
 
 You can adjust these constants at the top of the sketch to fine-tune behaviour for your build:
 
@@ -94,7 +94,7 @@ int RIGHT_SPEED        = 200;  // Right motor trim
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Robo-Pet-ESP32/
@@ -104,7 +104,7 @@ Robo-Pet-ESP32/
 
 ---
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 **Robot not moving?**
 - Check that `STBY` pin is wired and `digitalWrite(STBY, HIGH)` is present in `setup()`.
@@ -119,12 +119,6 @@ Robo-Pet-ESP32/
 
 ---
 
-## 📄 License
-
-This project is open source under the [MIT License](LICENSE).
-
----
-
-## 🙌 Contributing
+## Contributing
 
 Pull requests are welcome! If you improve the movement logic, add turning behaviour, or integrate additional sensors, feel free to open a PR.
