@@ -1,50 +1,130 @@
-# Robo-Pet-ESP32
+# 🤖 RoboPet — ESP32 Obstacle-Avoiding Robot
 
-Autonomous obstacle-avoiding robot built with ESP32. Uses a servo-mounted HC-SR04 ultrasonic sensor to sweep and scan the environment, automatically moving forward, stopping, or reversing based on detected distance. Fully tunable speed, sweep range, and distance thresholds.
+An autonomous obstacle-avoiding robot built on the **ESP32** microcontroller. RoboPet uses a sweeping ultrasonic sensor mounted on a servo to continuously scan its environment and react in real time — moving forward when the path is clear, stopping when something is close, and reversing when an obstacle is detected nearby.
 
-An autonomous robot pet project based on the ESP32 microcontroller. The robot uses an ultrasonic sensor to detect obstacles, a servo motor to scan the environment, and a motor driver to control movement.
+---
 
-## Features
-- **Obstacle Avoidance**: Utilizes an ultrasonic sensor to detect objects.
-  - Moves forward if the path is clear (> 25 cm).
-  - Stops if an object is within 15 cm to 25 cm.
-  - Reverses if an object is too close (< 15 cm).
-- **Environment Scanning**: The ultrasonic sensor is mounted on a servo motor that sweeps back and forth (between 20° and 160°) to give the robot a wider field of view.
-- **ESP32 Powered**: Takes advantage of the ESP32's processing power and precise PWM capabilities.
+## 📸 Overview
 
-## Hardware Components
-- ESP32 Development Board
-- Ultrasonic Sensor (HC-SR04)
-- Servo Motor (e.g., SG90)
-- Motor Driver (e.g., TB6612FNG or L298N)
-- 2x DC Motors & Wheels
+RoboPet mimics the curiosity of a small pet — always scanning ahead, cautiously navigating its surroundings without any human input.
 
-## Pin Mapping
+---
 
-### Ultrasonic Sensor
-- **TRIG_PIN**: 4
-- **ECHO_PIN**: 18
+## ⚙️ Hardware Requirements
 
-### Servo Motor
-- **SERVO_PIN**: 19
+| Component | Details |
+|---|---|
+| Microcontroller | ESP32 (any standard dev board) |
+| Ultrasonic Sensor | HC-SR04 (Trig: GPIO 4, Echo: GPIO 18) |
+| Servo Motor | Standard 5V servo (Signal: GPIO 19) |
+| Motor Driver | TB6612FNG or similar dual H-bridge |
+| DC Motors | 2× TT gear motors |
+| Power Supply | 7.4V LiPo or 2×18650 battery pack |
 
-### Motor Driver
-- **Motor A**
-  - AIN1: 14
-  - AIN2: 27
-  - PWMA: 26
-- **Motor B**
-  - BIN1: 33
-  - BIN2: 25
-  - PWMB: 32
-- **Standby (STBY)**: 13
+### Motor Driver Wiring
 
-## Software Dependencies
-- [ESP32Servo Library](https://github.com/madhephaestus/ESP32Servo) - Required for stable PWM control of the servo motor on the ESP32.
+| Motor Driver Pin | ESP32 GPIO |
+|---|---|
+| AIN1 | 14 |
+| AIN2 | 27 |
+| PWMA | 26 |
+| BIN1 | 33 |
+| BIN2 | 25 |
+| PWMB | 32 |
+| STBY | 13 |
 
-## Installation
-1. Install the [Arduino IDE](https://www.arduino.cc/en/software) and set up the [ESP32 board manager](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html).
-2. Open the Library Manager in the Arduino IDE and install the **ESP32Servo** library by Kevin Harrington.
-3. Open the `RoboPet.ino` file in the Arduino IDE.
-4. Select your specific ESP32 board and the correct COM port.
-5. Compile and upload the code to your ESP32.
+---
+
+## 📦 Dependencies
+
+Install the following library via the **Arduino Library Manager** or PlatformIO:
+
+- [`ESP32Servo`](https://github.com/madhephaestus/ESP32Servo) — Servo control for ESP32
+
+---
+
+## 🚀 Getting Started
+
+1. **Clone this repository**
+   ```bash
+   git clone https://github.com/Vaibhav-pachori/Robo-Pet-ESP32.git
+   cd Robo-Pet-ESP32
+   ```
+
+2. **Open in Arduino IDE** (or PlatformIO)
+   - Select your ESP32 board from *Tools → Board*
+   - Select the correct COM port
+
+3. **Install dependencies**
+   - Search for `ESP32Servo` in the Library Manager and install it
+
+4. **Upload the sketch**
+   - Click *Upload* and open the Serial Monitor at `115200` baud
+
+---
+
+## 🧠 How It Works
+
+The servo sweeps left and right continuously, taking an ultrasonic distance reading at each step.
+
+| Distance | Behavior |
+|---|---|
+| < 15 cm | Move **backward** (obstacle too close) |
+| 15 – 25 cm | **Stop** (cautious zone) |
+| > 25 cm | Move **forward** (path is clear) |
+
+The servo sweeps between **20° and 160°** (±70° from center) in 1° increments for smooth, continuous scanning.
+
+---
+
+## 🔧 Tunable Parameters
+
+You can adjust these constants at the top of the sketch to fine-tune behaviour for your build:
+
+```cpp
+const int SERVO_CENTER = 90;   // Servo neutral position
+const int SWEEP_RANGE  = 70;   // Half-sweep angle (degrees)
+const int SERVO_STEP   = 1;    // Step size per loop iteration
+const int MOTOR_SPEED  = 120;  // Base PWM speed (0–255)
+int LEFT_SPEED         = 160;  // Left motor trim
+int RIGHT_SPEED        = 200;  // Right motor trim
+```
+
+> **Tip:** If your robot drifts left or right, adjust `LEFT_SPEED` and `RIGHT_SPEED` until it tracks straight.
+
+---
+
+## 📁 Project Structure
+
+```
+Robo-Pet-ESP32/
+├── RoboPet.ino       # Main Arduino sketch
+└── README.md
+```
+
+---
+
+## 🛠️ Troubleshooting
+
+**Robot not moving?**
+- Check that `STBY` pin is wired and `digitalWrite(STBY, HIGH)` is present in `setup()`.
+- Verify your motor driver power supply is connected separately from the ESP32's 3.3V rail.
+
+**Servo jittering?**
+- Ensure the servo has a stable 5V supply. Powering it from the ESP32's onboard 3.3V pin will cause instability.
+
+**Distance readings erratic?**
+- Add a small capacitor (10–100µF) across the HC-SR04's VCC and GND pins.
+- Ensure no obstacles are within 2 cm of the sensor at startup.
+
+---
+
+## 📄 License
+
+This project is open source under the [MIT License](LICENSE).
+
+---
+
+## 🙌 Contributing
+
+Pull requests are welcome! If you improve the movement logic, add turning behaviour, or integrate additional sensors, feel free to open a PR.
