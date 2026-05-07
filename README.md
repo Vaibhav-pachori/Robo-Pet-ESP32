@@ -19,7 +19,11 @@ RoboPet mimics the curiosity of a small pet — always scanning ahead, cautiousl
 | Servo Motor | Standard 5V servo (Signal: GPIO 19) |
 | Motor Driver | TB6612FNG or similar dual H-bridge |
 | DC Motors | 2× TT gear motors |
-| Power Supply | 7.4V LiPo or 2×18650 battery pack |
+| Wheels & Chassis | 2× Wheels and Robot Frame |
+| Power Supply | 3× Lithium-Ion Batteries with Battery Socket |
+| Voltage Regulation | Buck Converter |
+| Power Control | Power Switch |
+| Prototyping | Breadboard |
 
 ### Motor Driver Wiring
 
