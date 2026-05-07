@@ -1,5 +1,7 @@
 # Robo-Pet-ESP32
 
+Autonomous obstacle-avoiding robot built with ESP32. Uses a servo-mounted HC-SR04 ultrasonic sensor to sweep and scan the environment, automatically moving forward, stopping, or reversing based on detected distance. Fully tunable speed, sweep range, and distance thresholds.
+
 An autonomous robot pet project based on the ESP32 microcontroller. The robot uses an ultrasonic sensor to detect obstacles, a servo motor to scan the environment, and a motor driver to control movement.
 
 ## Features
