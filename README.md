@@ -8,6 +8,14 @@ An autonomous obstacle-avoiding robot built on the **ESP32** microcontroller. Ro
 
 RoboPet mimics the curiosity of a small pet — always scanning ahead, cautiously navigating its surroundings without any human input.
 
+### 🎥 See it in Action!
+
+**Working Demo:**
+https://github.com/Vaibhav-pachori/Robo-Pet-ESP32/raw/main/working.mp4
+
+**Hardware Overview:**
+https://github.com/Vaibhav-pachori/Robo-Pet-ESP32/raw/main/overview.mp4
+
 ---
 
 ## Hardware Requirements
